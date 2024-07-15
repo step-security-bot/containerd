@@ -29,9 +29,9 @@ jobs:
 
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./.github/actions/install-go
-      - uses: golangci/golangci-lint-action@v6
+      - uses: golangci/golangci-lint-action@a4f60bb28d35aeee14e6880718e0c85ff1882e64 # v6.0.1
         with:
           version: v1.59.1
           skip-cache: true
@@ -46,14 +46,14 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           path: src/github.com/containerd/containerd
           fetch-depth: 100
 
       - uses: ./src/github.com/containerd/containerd/.github/actions/install-go
 
-      - uses: containerd/project-checks@v1.1.0
+      - uses: containerd/project-checks@434a07157608eeaa1d5c8d4dd506154204cd9401 # v1.1.0
         if: github.repository == 'containerd/containerd'
         with:
           working-directory: src/github.com/containerd/containerd
@@ -78,7 +78,7 @@ jobs:
         working-directory: src/github.com/containerd/containerd
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           path: src/github.com/containerd/containerd
 
@@ -108,7 +108,7 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./.github/actions/install-go
       - run: go install github.com/cpuguy83/go-md2man/v2@v2.0.2
       - run: make man
@@ -139,7 +139,7 @@ jobs:
             goarm: "7"
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./.github/actions/install-go
       - run: |
           set -e -x
@@ -195,7 +195,7 @@ jobs:
         exclude:
           - os: ${{ github.repository != 'containerd/containerd' && 'actuated-arm64-4cpu-16gb' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./.github/actions/install-go
         with:
           go-version: ${{ matrix.go-version }}
@@ -226,13 +226,13 @@ jobs:
         working-directory: src/github.com/containerd/containerd
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           path: src/github.com/containerd/containerd
 
       - uses: ./src/github.com/containerd/containerd/.github/actions/install-go
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           repository: kubernetes-sigs/cri-tools
           path: src/github.com/kubernetes-sigs/cri-tools
@@ -364,7 +364,7 @@ jobs:
           }
           critest.exe --runtime-endpoint=npipe://.//pipe//containerd-containerd --test-images-file='${{env.CRI_TEST_IMAGES}}' --report-dir='${{github.workspace}}/critestreport' $skip
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4.3.4
         if: always()
         with:
           name: TestResults ${{ matrix.os }}
@@ -392,7 +392,7 @@ jobs:
     env:
       GOTEST: gotestsum --
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./.github/actions/install-go
 
       - name: Install containerd dependencies
@@ -507,7 +507,7 @@ jobs:
           sudo lsmod
           sudo dmesg -T -f kern
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4.3.4
         if: always()
         with:
           name: TestResults ${{ matrix.runtime }} ${{matrix.runc}} ${{ matrix.os }}
@@ -545,8 +545,8 @@ jobs:
           cat /etc/os-release
           cat /proc/cpuinfo
           free -mt
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
         with:
           path: /root/.vagrant.d
           key: vagrant-${{ matrix.box }}
@@ -598,7 +598,7 @@ jobs:
     needs: [project, linters, protos, man]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: Set up cgroup v2 delegation
         run: |
           sudo mkdir -p /etc/systemd/system/user@.service.d
@@ -623,7 +623,7 @@ jobs:
       GOTEST: gotestsum --
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./.github/actions/install-go
       - run: script/setup/install-gotestsum
       - run: script/setup/install-teststat
@@ -636,7 +636,7 @@ jobs:
         if: always()
       - run: script/test/test2annotation.sh *-gotest.json
         if: always()
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4.3.4
         if: always()
         with:
           name: TestResults MacOS

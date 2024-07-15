@@ -13,7 +13,7 @@
 #   limitations under the License.
 
 # For details, see https://github.com/devcontainers/images/tree/main/src/base-ubuntu
-FROM mcr.microsoft.com/devcontainers/base:1-ubuntu-22.04
+FROM mcr.microsoft.com/devcontainers/base:1-ubuntu-22.04@sha256:992da2407303b4224362e0dac5c5c9235ae4371da4f7d9babe8f9013659f6933
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends \

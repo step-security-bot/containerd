@@ -14,19 +14,19 @@ jobs:
     steps:
     - name: Build Fuzzers
       id: build
-      uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@master
+      uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@037a2b0dbcc9402512c06805ad06637c6003bf79 # master
       with:
         oss-fuzz-project-name: 'containerd'
         language: go
     - name: Run Fuzzers
-      uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@master
+      uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@037a2b0dbcc9402512c06805ad06637c6003bf79 # master
       with:
         oss-fuzz-project-name: 'containerd'
         fuzz-seconds: 300
         language: go
       continue-on-error: true
     - name: Upload Crash
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4.3.4
       if: failure() && steps.build.outcome == 'success'
       with:
         name: artifacts
@@ -40,6 +40,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./.github/actions/install-go
       - run: script/go-test-fuzz.sh
