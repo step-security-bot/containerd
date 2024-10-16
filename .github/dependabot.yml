@@ -23,3 +23,38 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+
+  - package-ecosystem: docker
+    directory: /.devcontainer
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /.github/workflows/release
+    schedule:
+      interval: daily
+
+  - package-ecosystem: gomod
+    directory: /api
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /integration/images/volume-copy-up
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /integration/images/volume-ownership
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /vendor/github.com/pelletier/go-toml/v2
+    schedule:
+      interval: daily
+
+  - package-ecosystem: pip
+    directory: /vendor/go.opentelemetry.io/otel
+    schedule:
+      interval: daily
